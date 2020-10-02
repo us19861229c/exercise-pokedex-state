@@ -20,6 +20,7 @@ body {
 
 .pokedex {
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
   margin: 10px 10px;
 }
