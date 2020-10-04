@@ -28,8 +28,21 @@ class Pokedex extends React.Component {
   handlePokemonType(target) {
     const { pokemons } = this.props;
     const pokemonType = target.innerText;
-    const myPokemons = pokemons.filter((pokemon) => pokemon.type === pokemonType);
-    this.setState({allPokemons: myPokemons});
+    let myPokemons;
+    if(pokemonType === 'All'){
+      myPokemons = pokemons;
+    }else{
+      myPokemons = pokemons.filter((pokemon) => pokemon.type === pokemonType);
+    }
+    const buttonDisabled = document.querySelector('#nextPokemon');
+    if (myPokemons.length < 2) {
+      buttonDisabled.setAttribute('disbled', true);
+      buttonDisabled.classList.add('disabled-button');
+    }else{
+      buttonDisabled.setAttribute('disbled', false);
+      buttonDisabled.classList.remove('disabled-button');
+    }
+    this.setState({pokemonDisplayed: 0, allPokemons: myPokemons});
   }
 
   render() {
@@ -41,6 +54,26 @@ class Pokedex extends React.Component {
           pokemon={allPokemons[pokemonDisplayed]}
         />
         <div className="buttons-pokemon">
+         <button
+            onClick={(event) => this.handlePokemonType(event.target)}
+          >
+            All
+          </button>
+          <button
+            onClick={(event) => this.handlePokemonType(event.target)}
+          >
+            Bug
+          </button>
+          <button
+            onClick={(event) => this.handlePokemonType(event.target)}
+          >
+            Dragon
+          </button>
+          <button
+            onClick={(event) => this.handlePokemonType(event.target)}
+          >
+            Electric
+          </button>
           <button
             onClick={(event) => this.handlePokemonType(event.target)}
           >
@@ -49,11 +82,22 @@ class Pokedex extends React.Component {
           <button
             onClick={(event) => this.handlePokemonType(event.target)}
           >
+            Poison
+          </button>
+          <button
+            onClick={(event) => this.handlePokemonType(event.target)}
+          >
             Psychic
+          </button>
+          <button
+            onClick={(event) => this.handlePokemonType(event.target)}
+          >
+            Normal
           </button>
           <br />
           <button
             onClick={() => this.handleNextPokemon(allPokemons)}
+            id="nextPokemon"
           >
             Próximo
           </button>
